@@ -53,7 +53,7 @@ jobs:
       with: 
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-        .pkg.github.coregistry: dockerm
+        registry: docker.pkg.github.com
         repository: ${{ github.repository }}/cicdbatch12
         tag_with_sha: true
         tag_with_ref: true
