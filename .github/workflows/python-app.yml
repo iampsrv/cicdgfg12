@@ -18,23 +18,24 @@ jobs:
         pip install pytest
         pip install -r requirements.txt
         pwd
+        touch /home/runner/work/cicdgfg12/cicdgfg12/pranjal.txt
     - name: Test with pytest
       run: |
         pytest test.py --doctest-modules --junitxml=junit/test-results.xml
 
-    # - name: Upload pytest test results
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: pytest-results
-    #     path: junit/test-results.xml
-    #   # Use always() to always run this step to publish test results when there are test failures
-    #   if: ${{ always() }}
+    - name: Upload pytest test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: pytest-results
+        path: junit/test-results.xml
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
       
     - name: Upload pranjal txt file
       uses: actions/upload-artifact@v3
       with:
-        name: pytest-results
-        path: junit/pranjal.txt
+        name: pranjaltext
+        path: /home/runner/work/cicdgfg12/cicdgfg12/pranjal.txt
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
   
