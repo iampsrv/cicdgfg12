@@ -17,6 +17,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         pip install -r requirements.txt
+        touch junit/pranjal.txt
     - name: Test with pytest
       run: |
         pytest test.py --doctest-modules --junitxml=junit/test-results.xml
@@ -26,6 +27,14 @@ jobs:
       with:
         name: pytest-results
         path: junit/test-results.xml
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
+      
+    - name: Upload pranjal txt file
+      uses: actions/upload-artifact@v3
+      with:
+        name: pytest-results
+        path: junit/pranjal.txt
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
   
@@ -48,16 +57,16 @@ jobs:
   #       tag_with_sha: true
   #       tag_with_ref: true
   
-  # build-and-push-docker-image-to-dockerhub:
-  #   runs-on: ubuntu-latest   
-  #   steps:
-  #     - name: Check out code
-  #       uses: actions/checkout@v2
+  build-and-push-docker-image-to-dockerhub:
+    runs-on: ubuntu-latest   
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
         
-  #     - name: Push to docker Hub
-  #       uses: docker/build-push-action@v1
-  #       with:
-  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
-  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-  #         repository: psrv3/gfgcricketworldcup
-  #         tag_with_ref: true
+      - name: Build and Push docker image to docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: psrv3/cicdbatch12
+          tag_with_ref: true
