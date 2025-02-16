@@ -2,7 +2,7 @@ name: Build and Test Python application
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "masterpranjal" ]
 jobs:
   build_and_test:
     strategy:
