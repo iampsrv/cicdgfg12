@@ -2,7 +2,7 @@ name: Build and Test Python application with skip
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 jobs:
   build_and_test:
     strategy:
