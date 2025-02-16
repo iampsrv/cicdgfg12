@@ -7,7 +7,7 @@ jobs:
   build_and_test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
@@ -20,8 +20,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest
         pip install -r requirements.txt
-        pwd
-        touch /home/runner/work/cicdgfg12/cicdgfg12/pranjal.txt
+        # pwd
+        # touch /home/runner/work/cicdgfg12/cicdgfg12/pranjal.txt
     - name: Test with pytest
       run: |
         pytest test.py --doctest-modules --junitxml=junit/test-results.xml
